@@ -21,6 +21,14 @@ const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
 const checkoutBtn = document.getElementById('checkout-btn');
 const toastEl = document.getElementById('toast');
+const productInfoModal = document.getElementById('product-info-modal');
+const productInfoTitle = document.getElementById('product-info-title');
+const productInfoDescription = document.getElementById('product-info-description');
+const productInfoDetails = document.getElementById('product-info-details');
+const productInfoClose = document.getElementById('product-info-close');
+const productInfoBackdrop = productInfoModal?.querySelector('[data-close-modal]');
+
+let lastFocusedElement = null;
 
 init();
 
@@ -32,6 +40,7 @@ function init() {
   renderCartPanel();
   updateCartBadge();
   bindEvents();
+  setupModal();
 }
 
 function bindEvents() {
@@ -173,17 +182,34 @@ function renderProducts() {
         <span>${product.type}</span>
         <span class="price">${product.price.toLocaleString('ru-RU')} ₽</span>
       </div>
-      <button class="btn btn-primary cart-button" type="button">Добавить в корзину</button>
+      <div class="product-actions">
+        <button class="btn btn-secondary info-button" type="button">О товаре</button>
+        <button class="btn btn-primary cart-button" type="button">Добавить в корзину</button>
+      </div>
       </div>
     `;
 
-    card.querySelector('button').addEventListener('click', () => {
+    const infoButton = card.querySelector('.info-button');
+    const addToCartButton = card.querySelector('.cart-button');
+
+    infoButton?.addEventListener('click', () => {
+      openProductInfo(product);
+    });
+
+    addToCartButton?.addEventListener('click', () => {
       NeonForgeCart.addToCart({
         id: product.id,
         name: product.name,
         price: product.price,
       });
       showToast(`«${product.name}» добавлен в корзину.`);
+      if (cartPanelEl) {
+        cartPanelEl.classList.add('open');
+        cartPanelEl.setAttribute('aria-hidden', 'false');
+      }
+      if (cartToggleEl) {
+        cartToggleEl.setAttribute('aria-expanded', 'true');
+      }
     });
 
     productGridEl.appendChild(card);
@@ -292,6 +318,68 @@ function updateCartBadge() {
   const count = items.reduce((total, item) => total + item.quantity, 0);
   const badge = cartToggleEl.querySelector('span');
   if (badge) badge.textContent = count;
+}
+
+function setupModal() {
+  if (!productInfoModal) return;
+
+  productInfoClose?.addEventListener('click', closeProductInfo);
+  productInfoBackdrop?.addEventListener('click', closeProductInfo);
+
+  productInfoModal.addEventListener('click', (event) => {
+    if (event.target === productInfoModal) {
+      closeProductInfo();
+    }
+  });
+
+  document.addEventListener('keydown', handleModalKeydown);
+}
+
+function openProductInfo(product) {
+  if (!productInfoModal || !productInfoTitle || !productInfoDescription || !productInfoDetails) return;
+
+  lastFocusedElement = document.activeElement;
+
+  productInfoTitle.textContent = product.name;
+  productInfoDescription.textContent = product.description;
+  productInfoDetails.innerHTML = '';
+
+  if (Array.isArray(product.details) && product.details.length > 0) {
+    product.details.forEach((detail) => {
+      const row = document.createElement('li');
+      const label = document.createElement('strong');
+      label.textContent = detail.label;
+      const value = document.createElement('span');
+      value.textContent = detail.value;
+      row.append(label, value);
+      productInfoDetails.appendChild(row);
+    });
+  } else {
+    const row = document.createElement('li');
+    row.textContent = 'Подробности о товаре скоро появятся.';
+    productInfoDetails.appendChild(row);
+  }
+
+  productInfoModal.classList.add('is-open');
+  productInfoModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+  productInfoClose?.focus();
+}
+
+function closeProductInfo() {
+  if (!productInfoModal) return;
+  productInfoModal.classList.remove('is-open');
+  productInfoModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('no-scroll');
+  if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+    lastFocusedElement.focus();
+  }
+}
+
+function handleModalKeydown(event) {
+  if (event.key === 'Escape' && productInfoModal?.classList.contains('is-open')) {
+    closeProductInfo();
+  }
 }
 
 function showToast(message) {

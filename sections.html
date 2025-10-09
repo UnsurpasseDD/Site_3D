@@ -77,6 +77,16 @@
 
   <div class="toast" id="toast">Товар добавлен в корзину.</div>
 
+  <div class="modal" id="product-info-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="product-info-title">
+      <button class="modal-close" type="button" id="product-info-close" aria-label="Закрыть">×</button>
+      <h3 id="product-info-title"></h3>
+      <p id="product-info-description"></p>
+      <ul class="modal-details" id="product-info-details"></ul>
+    </div>
+  </div>
+
   <script src="assets/js/data.js" defer></script>
   <script src="assets/js/cart.js" defer></script>
   <script src="assets/js/shop.js" defer></script>
