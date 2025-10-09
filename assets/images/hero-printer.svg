@@ -18,10 +18,18 @@
       <stop offset="0" stop-color="#37BDF8"/>
       <stop offset="1" stop-color="#4ADE80" stop-opacity="0.8"/>
     </linearGradient>
+    <linearGradient id="layerGradient" x1="480" y1="320" x2="480" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7DD3FC"/>
+      <stop offset="1" stop-color="#4ADE80"/>
+    </linearGradient>
     <radialGradient id="plateGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(480 510) scale(220 70)">
       <stop offset="0" stop-color="#37BDF8" stop-opacity="0.9"/>
       <stop offset="1" stop-color="#37BDF8" stop-opacity="0"/>
     </radialGradient>
+    <clipPath id="vaseClip" clipPathUnits="userSpaceOnUse">
+      <path d="M420 326L480 300L540 326L512 412L448 412L420 326Z"/>
+      <path d="M448 412H512L500 448H460L448 412Z"/>
+    </clipPath>
   </defs>
   <rect width="960" height="640" rx="56" fill="url(#bgGradient)"/>
   <rect x="140" y="100" width="680" height="440" rx="54" stroke="url(#frameGradient)" stroke-width="12" fill="#0B123A" fill-opacity="0.45"/>
@@ -29,14 +37,27 @@
   <rect x="280" y="190" width="400" height="260" rx="22" fill="#0F1C4C" opacity="0.35"/>
   <path d="M260 160C260 148.954 268.954 140 280 140H680C691.046 140 700 148.954 700 160V480C700 491.046 691.046 500 680 500H280C268.954 500 260 491.046 260 480V160Z" stroke="url(#frameGradient)" stroke-width="6" opacity="0.35"/>
   <path d="M420 130C420 118.954 428.954 110 440 110H520C531.046 110 540 118.954 540 130V190H420V130Z" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
-  <path d="M472 190H488L500 290H460L472 190Z" fill="url(#nozzleGradient)" stroke="#37BDF8" stroke-width="4"/>
-  <rect x="452" y="290" width="56" height="18" rx="6" fill="#37BDF8" fill-opacity="0.55"/>
+  <g id="printHead">
+    <path d="M472 190H488L500 290H460L472 190Z" fill="url(#nozzleGradient)" stroke="#37BDF8" stroke-width="4"/>
+    <rect x="452" y="290" width="56" height="18" rx="6" fill="#37BDF8" fill-opacity="0.55"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 120; 0 0" keyTimes="0;0.65;1" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1"/>
+  </g>
   <path d="M500 160C530 155 560 130 600 120" stroke="#A855F7" stroke-width="8" stroke-linecap="round"/>
   <path d="M600 120C650 110 710 110 720 170" stroke="#37BDF8" stroke-width="8" stroke-linecap="round"/>
   <circle cx="600" cy="120" r="10" fill="#A855F7"/>
   <circle cx="720" cy="170" r="12" fill="#37BDF8"/>
-  <path d="M420 326L480 300L540 326L512 412L448 412L420 326Z" fill="url(#objectGradient)" stroke="#37BDF8" stroke-width="4"/>
-  <path d="M448 412H512L500 448H460L448 412Z" fill="url(#objectGradient)" stroke="#37BDF8" stroke-width="3"/>
+  <path d="M420 326L480 300L540 326L512 412L448 412L420 326Z" fill="url(#objectGradient)" fill-opacity="0.35" stroke="#37BDF8" stroke-width="4"/>
+  <path d="M448 412H512L500 448H460L448 412Z" fill="url(#objectGradient)" fill-opacity="0.35" stroke="#37BDF8" stroke-width="3"/>
+  <g clip-path="url(#vaseClip)">
+    <rect x="420" y="448" width="120" height="0" fill="url(#layerGradient)" opacity="0.95">
+      <animate attributeName="y" values="448;300;300;448" keyTimes="0;0.65;0.85;1" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+      <animate attributeName="height" values="0;148;148;0" keyTimes="0;0.65;0.85;1" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+    </rect>
+    <rect x="420" y="440" width="120" height="10" rx="5" fill="#BAE6FD" opacity="0.8">
+      <animate attributeName="y" values="440;310;440" keyTimes="0;0.65;1" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1"/>
+      <animate attributeName="opacity" values="0.2;0.9;0.2" keyTimes="0;0.65;1" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1"/>
+    </rect>
+  </g>
   <ellipse cx="480" cy="512" rx="210" ry="60" fill="url(#plateGlow)"/>
   <rect x="360" y="488" width="240" height="18" rx="8" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
   <rect x="240" y="540" width="480" height="20" rx="10" fill="#111B45" stroke="#37BDF8" stroke-width="4" opacity="0.6"/>
