@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — NeonForge 3D</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="section-page">
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="index.html">Neon<span>Forge</span> 3D</a>
+      <div class="nav-links">
+        <a href="index.html#categories">Разделы</a>
+        <a href="index.html#printers">Наши принтеры</a>
+        <a href="index.html#benefits">Почему мы</a>
+        <a href="index.html#registration">Бонусы</a>
+      </div>
+    </nav>
+  </header>
+
+  <button class="cart-toggle" id="cart-toggle" type="button" aria-expanded="false">
+    Корзина <span>0</span>
+  </button>
+
+  <main>
+    <section class="section-header">
+      <span class="badge" id="category-breadcrumb">Каталог</span>
+      <h1 id="category-title">Все изделия</h1>
+      <p id="category-description">Выберите раздел, настройте фильтры и добавьте товар в корзину — оформление заказа займёт меньше минуты.</p>
+    </section>
+
+    <section class="filters" aria-label="Фильтр товаров">
+      <label>
+        Цена от (₽)
+        <input type="number" id="min-price" placeholder="0" min="0">
+      </label>
+      <label>
+        Цена до (₽)
+        <input type="number" id="max-price" placeholder="50000" min="0">
+      </label>
+      <label>
+        Вид товара
+        <select id="type-filter">
+          <option value="all">Все виды</option>
+        </select>
+      </label>
+      <label>
+        Сортировка
+        <select id="sort-order">
+          <option value="popular">По популярности</option>
+          <option value="price-asc">Сначала дешёвые</option>
+          <option value="price-desc">Сначала дорогие</option>
+        </select>
+      </label>
+    </section>
+
+    <section>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cart-panel" aria-hidden="true">
+    <header>
+      <h2>Ваша корзина</h2>
+    </header>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="total">
+        <span>Итого</span>
+        <span id="cart-total">0 ₽</span>
+      </div>
+      <button class="checkout-btn" type="button" id="checkout-btn">Оформить заказ</button>
+      <small>Регистрация не обязательна. После оплаты начислим бонусные баллы на аккаунт (если он есть).</small>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast">Товар добавлен в корзину.</div>
+
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/cart.js" defer></script>
+  <script src="assets/js/shop.js" defer></script>
+</body>
+</html>
