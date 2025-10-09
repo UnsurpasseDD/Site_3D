@@ -597,6 +597,13 @@ footer {
   justify-content: center;
 }
 
+.product-actions .btn.is-added {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(74, 222, 128, 0.25));
+  border-color: rgba(74, 222, 128, 0.65);
+  color: rgba(226, 232, 240, 0.95);
+  box-shadow: 0 12px 30px rgba(74, 222, 128, 0.25);
+}
+
 .info-button {
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(148, 163, 184, 0.45);

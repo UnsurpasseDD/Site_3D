@@ -191,6 +191,7 @@ function renderProducts() {
 
     const infoButton = card.querySelector('.info-button');
     const addToCartButton = card.querySelector('.cart-button');
+    const defaultCartLabel = addToCartButton?.textContent ?? 'Добавить в корзину';
 
     infoButton?.addEventListener('click', () => {
       openProductInfo(product);
@@ -209,6 +210,16 @@ function renderProducts() {
       }
       if (cartToggleEl) {
         cartToggleEl.setAttribute('aria-expanded', 'true');
+      }
+      if (addToCartButton) {
+        addToCartButton.disabled = true;
+        addToCartButton.classList.add('is-added');
+        addToCartButton.textContent = 'В корзине';
+        setTimeout(() => {
+          addToCartButton.disabled = false;
+          addToCartButton.classList.remove('is-added');
+          addToCartButton.textContent = defaultCartLabel;
+        }, 1600);
       }
     });
 
