@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes vaseBuild {
+        0% {
+          transform: scaleY(0.05);
+          filter: blur(8px);
+          opacity: 0.2;
+        }
+        20% {
+          opacity: 1;
+        }
+        45% {
+          filter: blur(2px);
+        }
+        100% {
+          transform: scaleY(1);
+          filter: blur(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes nozzleMotion {
+        0% {
+          transform: translate(-34px, 0px);
+        }
+        15% {
+          transform: translate(36px, 0px);
+        }
+        15.1% {
+          transform: translate(-34px, -26px);
+        }
+        30% {
+          transform: translate(36px, -26px);
+        }
+        30.1% {
+          transform: translate(-34px, -52px);
+        }
+        45% {
+          transform: translate(36px, -52px);
+        }
+        45.1% {
+          transform: translate(-34px, -78px);
+        }
+        60% {
+          transform: translate(36px, -78px);
+        }
+        60.1% {
+          transform: translate(-34px, -104px);
+        }
+        75% {
+          transform: translate(36px, -104px);
+        }
+        75.1% {
+          transform: translate(-34px, -130px);
+        }
+        90% {
+          transform: translate(36px, -130px);
+        }
+        100% {
+          transform: translate(-34px, -156px);
+        }
+      }
+
+      @keyframes layerSweep {
+        0% {
+          opacity: 0;
+          transform: translateY(120px);
+        }
+        20% {
+          opacity: 0.85;
+        }
+        80% {
+          opacity: 0.35;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-160px);
+        }
+      }
+
+      @keyframes filamentPulse {
+        0%,
+        100% {
+          stroke-dashoffset: 210;
+          opacity: 0;
+        }
+        15% {
+          stroke-dashoffset: 140;
+          opacity: 0.6;
+        }
+        30% {
+          stroke-dashoffset: 70;
+          opacity: 0.9;
+        }
+        45% {
+          stroke-dashoffset: 0;
+          opacity: 0.9;
+        }
+        75% {
+          stroke-dashoffset: -140;
+          opacity: 0.6;
+        }
+        100% {
+          stroke-dashoffset: -210;
+          opacity: 0;
+        }
+      }
+
+      .vase-progress,
+      .vase-layers,
+      .vase-highlight,
+      .mask-progress {
+        transform-box: fill-box;
+        transform-origin: center bottom;
+        animation: vaseBuild 7s steps(18, end) infinite alternate;
+      }
+
+      .vase-layers {
+        animation-delay: 0.1s;
+      }
+
+      .vase-highlight {
+        mix-blend-mode: screen;
+        opacity: 0.45;
+        animation-delay: 0.2s;
+      }
+
+      .mask-progress {
+        animation-timing-function: steps(18, end);
+      }
+
+      .print-nozzle {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: nozzleMotion 7s linear infinite;
+        filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.6));
+      }
+
+      .print-scan {
+        mix-blend-mode: screen;
+        animation: layerSweep 7s linear infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .filament-trace {
+        fill: none;
+        stroke: rgba(56, 189, 248, 0.55);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 210;
+        animation: filamentPulse 7s linear infinite;
+        filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7));
+      }
+    </style>
+    <linearGradient id="bgGradient" x1="120" y1="40" x2="840" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#041235"/>
+      <stop offset="0.5" stop-color="#102060"/>
+      <stop offset="1" stop-color="#060B26"/>
+    </linearGradient>
+    <linearGradient id="frameGradient" x1="160" y1="120" x2="800" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="nozzleGradient" x1="480" y1="150" x2="480" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#37BDF8"/>
+    </linearGradient>
+    <linearGradient id="objectGradient" x1="480" y1="320" x2="480" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8"/>
+      <stop offset="1" stop-color="#4ADE80" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="scanGradient" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#37BDF8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#37BDF8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="plateGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(480 510) scale(220 70)">
+      <stop offset="0" stop-color="#37BDF8" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#37BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="layerHighlight" x1="420" y1="300" x2="540" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#60A5FA" stop-opacity="0.0"/>
+      <stop offset="0.5" stop-color="#A855F7" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0.0"/>
+    </linearGradient>
+    <pattern id="layerPattern" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="rgba(15, 28, 76, 0.0)"/>
+      <rect y="6" width="12" height="3" fill="rgba(94, 234, 212, 0.35)"/>
+    </pattern>
+    <mask id="vaseMask" maskUnits="userSpaceOnUse" x="420" y="300" width="120" height="160">
+      <rect class="mask-progress" x="420" y="300" width="120" height="160" fill="white"/>
+    </mask>
+  </defs>
+  <rect width="960" height="640" rx="56" fill="url(#bgGradient)"/>
+  <rect x="140" y="100" width="680" height="440" rx="54" stroke="url(#frameGradient)" stroke-width="12" fill="#0B123A" fill-opacity="0.45"/>
+  <rect x="190" y="150" width="580" height="340" rx="36" stroke="url(#frameGradient)" stroke-width="6" opacity="0.45"/>
+  <rect x="280" y="190" width="400" height="260" rx="22" fill="#0F1C4C" opacity="0.35"/>
+  <path d="M260 160C260 148.954 268.954 140 280 140H680C691.046 140 700 148.954 700 160V480C700 491.046 691.046 500 680 500H280C268.954 500 260 491.046 260 480V160Z" stroke="url(#frameGradient)" stroke-width="6" opacity="0.35"/>
+  <path d="M420 130C420 118.954 428.954 110 440 110H520C531.046 110 540 118.954 540 130V190H420V130Z" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
+  <g class="print-nozzle">
+    <path d="M472 190H488L500 290H460L472 190Z" fill="url(#nozzleGradient)" stroke="#37BDF8" stroke-width="4"/>
+    <rect x="452" y="290" width="56" height="18" rx="6" fill="#37BDF8" fill-opacity="0.55"/>
+    <path class="filament-trace" d="M452 308C470 320 490 320 508 308"/>
+  </g>
+  <path d="M500 160C530 155 560 130 600 120" stroke="#A855F7" stroke-width="8" stroke-linecap="round"/>
+  <path d="M600 120C650 110 710 110 720 170" stroke="#37BDF8" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="600" cy="120" r="10" fill="#A855F7"/>
+  <circle cx="720" cy="170" r="12" fill="#37BDF8"/>
+  <g mask="url(#vaseMask)">
+    <rect class="vase-progress" x="420" y="300" width="120" height="160" fill="url(#objectGradient)"/>
+    <rect class="vase-layers" x="420" y="300" width="120" height="160" fill="url(#layerPattern)"/>
+    <rect class="vase-highlight" x="420" y="300" width="120" height="160" fill="url(#layerHighlight)"/>
+  </g>
+  <path d="M420 326L480 300L540 326L512 412L448 412L420 326Z" fill="none" stroke="#37BDF8" stroke-width="4"/>
+  <path d="M448 412H512L500 448H460L448 412Z" fill="none" stroke="#37BDF8" stroke-width="3"/>
+  <rect class="print-scan" x="434" y="308" width="92" height="150" rx="26" fill="url(#scanGradient)" opacity="0.65"/>
+  <ellipse cx="480" cy="512" rx="210" ry="60" fill="url(#plateGlow)"/>
+  <rect x="360" y="488" width="240" height="18" rx="8" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
+  <rect x="240" y="540" width="480" height="20" rx="10" fill="#111B45" stroke="#37BDF8" stroke-width="4" opacity="0.6"/>
+  <circle cx="280" cy="170" r="8" fill="#37BDF8"/>
+  <circle cx="680" cy="170" r="8" fill="#37BDF8"/>
+  <circle cx="280" cy="470" r="8" fill="#A855F7"/>
+  <circle cx="680" cy="470" r="8" fill="#A855F7"/>
+  <g opacity="0.4">
+    <path d="M220 230H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 260H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 290H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.4">
+    <path d="M640 230H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 260H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 290H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
