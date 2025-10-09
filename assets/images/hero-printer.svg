@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes printReveal {
+        0% {
+          transform: translateY(8px);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        70% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(8px);
+          opacity: 0;
+        }
+      }
+
+      @keyframes headTravel {
+        0% {
+          transform: translateY(0);
+        }
+        45% {
+          transform: translateY(32px);
+        }
+        70% {
+          transform: translateY(32px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes filamentFlow {
+        0% {
+          height: 0;
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        45% {
+          height: 46px;
+        }
+        70% {
+          height: 46px;
+        }
+        100% {
+          height: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes layerPulse {
+        0%, 100% {
+          filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.55));
+        }
+        50% {
+          filter: drop-shadow(0 0 28px rgba(168, 85, 247, 0.65));
+        }
+      }
+
+      #print-object {
+        transform-origin: center bottom;
+        transform-box: fill-box;
+        animation: printReveal 8s ease-in-out infinite;
+      }
+
+      #print-object path {
+        animation: layerPulse 4s ease-in-out infinite alternate;
+      }
+
+      #print-head {
+        transform-box: fill-box;
+        transform-origin: center top;
+        animation: headTravel 8s ease-in-out infinite;
+      }
+
+      #filament {
+        transform-origin: center top;
+        animation: filamentFlow 8s ease-in-out infinite;
+      }
+    </style>
+    <linearGradient id="bgGradient" x1="120" y1="40" x2="840" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#041235"/>
+      <stop offset="0.5" stop-color="#102060"/>
+      <stop offset="1" stop-color="#060B26"/>
+    </linearGradient>
+    <linearGradient id="frameGradient" x1="160" y1="120" x2="800" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="nozzleGradient" x1="480" y1="150" x2="480" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#37BDF8"/>
+    </linearGradient>
+    <linearGradient id="objectGradient" x1="480" y1="320" x2="480" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8"/>
+      <stop offset="1" stop-color="#4ADE80" stop-opacity="0.8"/>
+    </linearGradient>
+    <radialGradient id="plateGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(480 510) scale(220 70)">
+      <stop offset="0" stop-color="#37BDF8" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#37BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="printRevealClip">
+      <rect x="420" y="412" width="120" height="0" rx="40">
+        <animate attributeName="y" values="412;300;300;412" keyTimes="0;0.45;0.7;1" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="height" values="0;112;112;0" keyTimes="0;0.45;0.7;1" dur="8s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+  </defs>
+  <rect width="960" height="640" rx="56" fill="url(#bgGradient)"/>
+  <rect x="140" y="100" width="680" height="440" rx="54" stroke="url(#frameGradient)" stroke-width="12" fill="#0B123A" fill-opacity="0.45"/>
+  <rect x="190" y="150" width="580" height="340" rx="36" stroke="url(#frameGradient)" stroke-width="6" opacity="0.45"/>
+  <rect x="280" y="190" width="400" height="260" rx="22" fill="#0F1C4C" opacity="0.35"/>
+  <path d="M260 160C260 148.954 268.954 140 280 140H680C691.046 140 700 148.954 700 160V480C700 491.046 691.046 500 680 500H280C268.954 500 260 491.046 260 480V160Z" stroke="url(#frameGradient)" stroke-width="6" opacity="0.35"/>
+  <path d="M420 130C420 118.954 428.954 110 440 110H520C531.046 110 540 118.954 540 130V190H420V130Z" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
+  <g id="print-head">
+    <path d="M472 190H488L500 290H460L472 190Z" fill="url(#nozzleGradient)" stroke="#37BDF8" stroke-width="4"/>
+    <rect x="452" y="290" width="56" height="18" rx="6" fill="#37BDF8" fill-opacity="0.55"/>
+  </g>
+  <rect id="filament" x="480" y="308" width="6" height="0" rx="3" fill="#37BDF8" fill-opacity="0.7"/>
+  <path d="M500 160C530 155 560 130 600 120" stroke="#A855F7" stroke-width="8" stroke-linecap="round"/>
+  <path d="M600 120C650 110 710 110 720 170" stroke="#37BDF8" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="600" cy="120" r="10" fill="#A855F7"/>
+  <circle cx="720" cy="170" r="12" fill="#37BDF8"/>
+  <g id="print-object" clip-path="url(#printRevealClip)">
+    <path d="M420 326L480 300L540 326L512 412L448 412L420 326Z" fill="url(#objectGradient)" stroke="#37BDF8" stroke-width="4"/>
+    <path d="M448 412H512L500 448H460L448 412Z" fill="url(#objectGradient)" stroke="#37BDF8" stroke-width="3"/>
+  </g>
+  <ellipse cx="480" cy="512" rx="210" ry="60" fill="url(#plateGlow)"/>
+  <rect x="360" y="488" width="240" height="18" rx="8" fill="#111B45" stroke="#37BDF8" stroke-width="4"/>
+  <rect x="240" y="540" width="480" height="20" rx="10" fill="#111B45" stroke="#37BDF8" stroke-width="4" opacity="0.6"/>
+  <circle cx="280" cy="170" r="8" fill="#37BDF8"/>
+  <circle cx="680" cy="170" r="8" fill="#37BDF8"/>
+  <circle cx="280" cy="470" r="8" fill="#A855F7"/>
+  <circle cx="680" cy="470" r="8" fill="#A855F7"/>
+  <g opacity="0.4">
+    <path d="M220 230H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 260H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 290H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.4">
+    <path d="M640 230H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 260H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 290H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
