@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes buildCore {
+        0% {
+          transform: scaleY(0.06);
+          opacity: 0.2;
+          filter: blur(6px);
+        }
+        8% {
+          opacity: 0.85;
+        }
+        35% {
+          filter: blur(3px);
+        }
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+          filter: blur(0px);
+        }
+      }
+
+      @keyframes beamSweep {
+        0% {
+          opacity: 0;
+          transform: translateY(120px) scaleY(0.4);
+        }
+        12% {
+          opacity: 0.65;
+        }
+        55% {
+          opacity: 0.35;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-160px) scaleY(1.1);
+        }
+      }
+
+      @keyframes nozzleTravel {
+        0% {
+          transform: translate(-120px, -8px);
+        }
+        12% {
+          transform: translate(118px, -8px);
+        }
+        15% {
+          transform: translate(136px, -24px);
+        }
+        27% {
+          transform: translate(-118px, -24px);
+        }
+        30% {
+          transform: translate(-136px, -40px);
+        }
+        42% {
+          transform: translate(118px, -40px);
+        }
+        45% {
+          transform: translate(136px, -58px);
+        }
+        57% {
+          transform: translate(-118px, -58px);
+        }
+        60% {
+          transform: translate(-136px, -76px);
+        }
+        72% {
+          transform: translate(118px, -76px);
+        }
+        75% {
+          transform: translate(136px, -96px);
+        }
+        87% {
+          transform: translate(-118px, -96px);
+        }
+        90% {
+          transform: translate(-136px, -116px);
+        }
+        100% {
+          transform: translate(110px, -132px);
+        }
+      }
+
+      @keyframes filamentGlow {
+        0%,
+        100% {
+          stroke-dashoffset: 360;
+          opacity: 0;
+        }
+        18% {
+          stroke-dashoffset: 240;
+          opacity: 0.5;
+        }
+        36% {
+          stroke-dashoffset: 120;
+          opacity: 0.85;
+        }
+        54% {
+          stroke-dashoffset: 0;
+          opacity: 0.95;
+        }
+        78% {
+          stroke-dashoffset: -160;
+          opacity: 0.6;
+        }
+        100% {
+          stroke-dashoffset: -320;
+          opacity: 0;
+        }
+      }
+
+      @keyframes spoolSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+      @keyframes bedPulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 0.55;
+        }
+      }
+
+      @keyframes gantryGlow {
+        0%,
+        100% {
+          stroke-opacity: 0.45;
+        }
+        40% {
+          stroke-opacity: 0.8;
+        }
+      }
+
+      .vase-core,
+      .vase-pattern,
+      .vase-highlight {
+        transform-box: fill-box;
+        transform-origin: center bottom;
+        animation: buildCore 9s steps(32, end) infinite;
+      }
+
+      .vase-pattern {
+        animation-delay: 0.12s;
+        mix-blend-mode: screen;
+      }
+
+      .vase-highlight {
+        animation-delay: 0.28s;
+        mix-blend-mode: screen;
+        opacity: 0.6;
+      }
+
+      .print-scan {
+        mix-blend-mode: screen;
+        animation: beamSweep 9s linear infinite;
+      }
+
+      .print-nozzle {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: nozzleTravel 9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.6));
+      }
+
+      .filament-trace {
+        fill: none;
+        stroke: rgba(56, 189, 248, 0.7);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 320;
+        animation: filamentGlow 9s linear infinite;
+        filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8));
+      }
+
+      .spool {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: spoolSpin 5.5s linear infinite;
+        filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.5));
+      }
+
+      .build-plate {
+        animation: bedPulse 5s ease-in-out infinite;
+      }
+
+      .gantry {
+        animation: gantryGlow 6s ease-in-out infinite;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .vase-core,
+        .vase-pattern,
+        .vase-highlight,
+        .print-scan,
+        .print-nozzle,
+        .filament-trace,
+        .spool,
+        .build-plate,
+        .gantry {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+    <linearGradient id="bgGradient" x1="140" y1="60" x2="820" y2="580" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#030B2A"/>
+      <stop offset="45%" stop-color="#0C1C46"/>
+      <stop offset="100%" stop-color="#040821"/>
+    </linearGradient>
+    <linearGradient id="frameGradient" x1="160" y1="120" x2="800" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="gantryGradient" x1="320" y1="150" x2="640" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38BDF8" stop-opacity="0.2"/>
+      <stop offset="0.5" stop-color="#38BDF8" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#A855F7" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="vaseCoreGradient" x1="410" y1="180" x2="550" y2="476" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37BDF8" stop-opacity="0.95"/>
+      <stop offset="0.4" stop-color="#38BDF8" stop-opacity="0.9"/>
+      <stop offset="0.85" stop-color="#22D3EE" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#4ADE80" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="vaseHighlightGradient" x1="420" y1="220" x2="560" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="0.4" stop-color="#60A5FA" stop-opacity="0.45"/>
+      <stop offset="0.75" stop-color="#A855F7" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.0"/>
+    </linearGradient>
+    <linearGradient id="scanGradient" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#38BDF8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="plateGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(480 520) scale(230 70)">
+      <stop offset="0" stop-color="#37BDF8" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#37BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="layerPattern" width="16" height="14" patternUnits="userSpaceOnUse">
+      <rect width="16" height="14" fill="rgba(10, 20, 58, 0.0)"/>
+      <rect y="8" width="16" height="3" fill="rgba(94, 234, 212, 0.35)"/>
+      <animateTransform attributeName="patternTransform" type="translate" from="0 0" to="0 -14" dur="1.6s" repeatCount="indefinite"/>
+    </pattern>
+    <clipPath id="vaseClip">
+      <path id="vaseShape" d="M480 476C438 476 406 444 398 398L366 252C360 220 380 196 410 192L430 190V156C430 144 438 134 452 132L508 126C522 124 532 134 532 148V190L550 192C580 196 600 220 594 252L562 398C554 444 522 476 480 476Z"/>
+    </clipPath>
+  </defs>
+  <rect width="960" height="640" rx="56" fill="url(#bgGradient)"/>
+  <rect x="140" y="100" width="680" height="440" rx="54" stroke="url(#frameGradient)" stroke-width="12" fill="#0B123A" fill-opacity="0.4"/>
+  <rect x="190" y="150" width="580" height="340" rx="36" stroke="url(#frameGradient)" stroke-width="6" opacity="0.35"/>
+  <rect x="280" y="190" width="400" height="260" rx="24" fill="#0D163C" opacity="0.45"/>
+
+  <g class="gantry" stroke="url(#gantryGradient)" stroke-width="8" stroke-linecap="round" opacity="0.6">
+    <path d="M300 200H660"/>
+    <path d="M320 220H640"/>
+    <path d="M340 240H620"/>
+  </g>
+
+  <g class="spool" transform="translate(660 120)">
+    <circle cx="0" cy="0" r="46" fill="#0B122F" stroke="#38BDF8" stroke-width="4"/>
+    <circle cx="0" cy="0" r="30" fill="#111C45" stroke="#A855F7" stroke-width="3"/>
+    <circle cx="0" cy="0" r="10" fill="#38BDF8"/>
+    <path d="M0 -36L0 -10" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M24 -26L7 -7" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M-24 -26L-7 -7" stroke="#22D3EE" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <path d="M620 120C660 110 710 108 720 168" stroke="#37BDF8" stroke-width="8" stroke-linecap="round" opacity="0.75"/>
+  <path d="M500 162C530 156 560 132 600 122" stroke="#A855F7" stroke-width="8" stroke-linecap="round" opacity="0.75"/>
+  <circle cx="600" cy="122" r="10" fill="#A855F7"/>
+  <circle cx="720" cy="168" r="12" fill="#37BDF8"/>
+
+  <g clip-path="url(#vaseClip)">
+    <rect class="vase-core" x="374" y="146" width="212" height="330" fill="url(#vaseCoreGradient)"/>
+    <rect class="vase-pattern" x="374" y="146" width="212" height="330" fill="url(#layerPattern)"/>
+    <rect class="vase-highlight" x="374" y="146" width="212" height="330" fill="url(#vaseHighlightGradient)"/>
+  </g>
+
+  <use href="#vaseShape" fill="none" stroke="#38BDF8" stroke-width="4" opacity="0.85"/>
+  <path d="M414 220C440 202 520 202 546 220" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+  <ellipse cx="480" cy="220" rx="66" ry="16" fill="#101C4A" opacity="0.6" stroke="#38BDF8" stroke-width="4"/>
+
+  <rect class="print-scan" x="404" y="210" width="152" height="250" rx="40" fill="url(#scanGradient)" opacity="0.7"/>
+
+  <g class="print-nozzle" transform="translate(0,0)">
+    <path d="M468 200H492L506 300H454L468 200Z" fill="url(#frameGradient)" stroke="#38BDF8" stroke-width="4"/>
+    <rect x="446" y="300" width="64" height="18" rx="7" fill="#38BDF8" fill-opacity="0.6"/>
+    <path class="filament-trace" d="M446 318C470 332 490 332 514 318"/>
+    <circle cx="479" cy="190" r="10" fill="#38BDF8" stroke="#A855F7" stroke-width="4"/>
+  </g>
+
+  <path d="M360 484H600" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <ellipse cx="480" cy="520" rx="216" ry="64" fill="url(#plateGlow)"/>
+  <rect class="build-plate" x="352" y="496" width="256" height="20" rx="10" fill="#111B45" stroke="#38BDF8" stroke-width="4" opacity="0.5"/>
+  <rect x="240" y="540" width="480" height="20" rx="10" fill="#111B45" stroke="#38BDF8" stroke-width="4" opacity="0.55"/>
+
+  <g opacity="0.4">
+    <path d="M220 230H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 260H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 290H320" stroke="#37BDF8" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.4">
+    <path d="M640 230H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 260H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M640 290H740" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
