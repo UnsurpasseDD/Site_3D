@@ -15,11 +15,6 @@ const minPriceEl = document.getElementById('min-price');
 const maxPriceEl = document.getElementById('max-price');
 const sortOrderEl = document.getElementById('sort-order');
 const filtersSection = document.querySelector('.filters');
-const cartToggleEl = document.getElementById('cart-toggle');
-const cartPanelEl = document.getElementById('cart-panel');
-const cartItemsEl = document.getElementById('cart-items');
-const cartTotalEl = document.getElementById('cart-total');
-const checkoutBtn = document.getElementById('checkout-btn');
 const toastEl = document.getElementById('toast');
 const productInfoModal = document.getElementById('product-info-modal');
 const productInfoTitle = document.getElementById('product-info-title');
@@ -37,8 +32,6 @@ function init() {
   renderCategoryInfo();
   populateTypeOptions();
   renderProducts();
-  renderCartPanel();
-  updateCartBadge();
   bindEvents();
   setupModal();
 }
@@ -49,31 +42,6 @@ function bindEvents() {
   typeFilterEl?.addEventListener('change', handleFilterChange);
   sortOrderEl?.addEventListener('change', handleFilterChange);
 
-  cartToggleEl?.addEventListener('click', () => {
-    const isOpen = cartPanelEl?.classList.toggle('open');
-    if (cartToggleEl) {
-      cartToggleEl.setAttribute('aria-expanded', isOpen);
-    }
-    if (cartPanelEl) {
-      cartPanelEl.setAttribute('aria-hidden', !isOpen);
-    }
-  });
-
-  checkoutBtn?.addEventListener('click', () => {
-    const cartItems = NeonForgeCart.readCart();
-    if (cartItems.length === 0) {
-      showToast('Добавьте товары в корзину, чтобы оформить заказ.');
-      return;
-    }
-    showToast('Заказ оформлен! Бонусные баллы начислим автоматически.');
-    NeonForgeCart.clearCart();
-    renderCartPanel();
-  });
-
-  document.addEventListener('cart-updated', () => {
-    renderCartPanel();
-    updateCartBadge();
-  });
 }
 
 function handleFilterChange() {
@@ -184,32 +152,15 @@ function renderProducts() {
       </div>
       <div class="product-actions">
         <button class="btn btn-secondary info-button" type="button">О товаре</button>
-        <button class="btn btn-primary cart-button" type="button">Добавить в корзину</button>
+        <a class="btn btn-primary order-button" href="https://t.me/PrintMatter3D" target="_blank" rel="noopener">Заказать</a>
       </div>
       </div>
     `;
 
     const infoButton = card.querySelector('.info-button');
-    const addToCartButton = card.querySelector('.cart-button');
 
     infoButton?.addEventListener('click', () => {
       openProductInfo(product);
-    });
-
-    addToCartButton?.addEventListener('click', () => {
-      NeonForgeCart.addToCart({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-      });
-      showToast(`«${product.name}» добавлен в корзину.`);
-      if (cartPanelEl) {
-        cartPanelEl.classList.add('open');
-        cartPanelEl.setAttribute('aria-hidden', 'false');
-      }
-      if (cartToggleEl) {
-        cartToggleEl.setAttribute('aria-expanded', 'true');
-      }
     });
 
     productGridEl.appendChild(card);
@@ -264,60 +215,6 @@ function renderCustomRequest() {
   });
 
   productGridEl.appendChild(request);
-}
-
-function renderCartPanel() {
-  if (!cartItemsEl || !cartTotalEl) return;
-  const items = NeonForgeCart.readCart();
-  cartItemsEl.innerHTML = '';
-
-  if (items.length === 0) {
-    const empty = document.createElement('p');
-    empty.textContent = 'Корзина пока пуста. Добавьте неоновый шедевр!';
-    empty.style.color = 'rgba(226, 232, 240, 0.7)';
-    cartItemsEl.appendChild(empty);
-  } else {
-    items.forEach((item) => {
-      const row = document.createElement('div');
-      row.className = 'cart-item';
-      row.innerHTML = `
-        <div>
-          <strong>${item.name}</strong>
-          <div>${item.quantity} × ${item.price.toLocaleString('ru-RU')} ₽</div>
-        </div>
-        <div>
-          <button type="button" aria-label="Уменьшить количество">−</button>
-          <button type="button" aria-label="Увеличить количество">+</button>
-          <button type="button" aria-label="Удалить из корзины">Удалить</button>
-        </div>
-      `;
-
-      const [decreaseBtn, increaseBtn, removeBtn] = row.querySelectorAll('button');
-      decreaseBtn.addEventListener('click', () => {
-        if (item.quantity > 1) {
-          NeonForgeCart.updateQuantity(item.id, item.quantity - 1);
-        }
-      });
-      increaseBtn.addEventListener('click', () => {
-        NeonForgeCart.updateQuantity(item.id, item.quantity + 1);
-      });
-      removeBtn.addEventListener('click', () => {
-        NeonForgeCart.removeFromCart(item.id);
-      });
-
-      cartItemsEl.appendChild(row);
-    });
-  }
-
-  cartTotalEl.textContent = `${NeonForgeCart.getCartTotal(items).toLocaleString('ru-RU')} ₽`;
-}
-
-function updateCartBadge() {
-  if (!cartToggleEl) return;
-  const items = NeonForgeCart.readCart();
-  const count = items.reduce((total, item) => total + item.quantity, 0);
-  const badge = cartToggleEl.querySelector('span');
-  if (badge) badge.textContent = count;
 }
 
 function setupModal() {

@@ -19,15 +19,11 @@
     </nav>
   </header>
 
-  <button class="cart-toggle" id="cart-toggle" type="button" aria-expanded="false">
-    Корзина <span>0</span>
-  </button>
-
   <main>
     <section class="section-header">
       <span class="badge" id="category-breadcrumb">Каталог</span>
       <h1 id="category-title">Все изделия</h1>
-      <p id="category-description">Выберите раздел, настройте фильтры и добавьте товар в корзину — оформление заказа займёт меньше минуты.</p>
+      <p id="category-description">Выберите раздел, настройте фильтры и оформите заказ напрямую через мессенджер — мы ответим в течение часа.</p>
     </section>
 
     <section class="filters" aria-label="Фильтр товаров">
@@ -60,22 +56,7 @@
     </section>
   </main>
 
-  <aside class="cart-panel" id="cart-panel" aria-hidden="true">
-    <header>
-      <h2>Ваша корзина</h2>
-    </header>
-    <div class="cart-items" id="cart-items"></div>
-    <div class="cart-footer">
-      <div class="total">
-        <span>Итого</span>
-        <span id="cart-total">0 ₽</span>
-      </div>
-      <button class="checkout-btn" type="button" id="checkout-btn">Оформить заказ</button>
-      <small>Регистрация не обязательна. После оплаты начислим бонусные баллы на аккаунт (если он есть).</small>
-    </div>
-  </aside>
-
-  <div class="toast" id="toast">Товар добавлен в корзину.</div>
+  <div class="toast" id="toast">Спасибо! Мы уже обрабатываем ваш запрос.</div>
 
   <div class="modal" id="product-info-modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
@@ -88,7 +69,6 @@
   </div>
 
   <script src="assets/js/data.js" defer></script>
-  <script src="assets/js/cart.js" defer></script>
   <script src="assets/js/shop.js" defer></script>
 </body>
 </html>
